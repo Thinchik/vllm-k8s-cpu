@@ -1,0 +1,11 @@
+# Верхний уровень зависимостей. Полный граф с хешами генерируется в requirements.txt:
+#   ./scripts/lock-requirements.sh
+# Руками requirements.txt не редактируется.
+
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Официальное CPU-колесо из релиза vLLM (x86_64, AVX2/AVX512)
+vllm @ https://github.com/vllm-project/vllm/releases/download/v0.32.0/vllm-0.32.0+cpu-cp38-abi3-manylinux_2_39_x86_64.whl
+
+# libiomp5.so для LD_PRELOAD (рекомендация из документации vLLM CPU)
+intel-openmp==2024.2.1

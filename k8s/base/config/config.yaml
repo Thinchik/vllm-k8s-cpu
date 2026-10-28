@@ -1,0 +1,24 @@
+# Аргументы `vllm serve`, монтируются в контейнер как /etc/vllm/config/config.yaml.
+# Ключи - это имена CLI-флагов без "--". Меняются без пересборки образа:
+# правим файл -> kubectl apply -k ... -> под перезапускается с новыми параметрами.
+
+host: 0.0.0.0
+port: 8000
+served-model-name: qwen2.5-1.5b-instruct
+
+dtype: bfloat16
+max-model-len: 8192
+
+# Планировщик: сколько последовательностей и токенов обрабатывается за один шаг
+max-num-seqs: 16
+max-num-batched-tokens: 2048
+enable-chunked-prefill: true
+enable-prefix-caching: true
+
+# Включаем RequestLogger: факт запроса логируется, а сами тексты вырезает патч vllm_privacy
+enable-log-requests: true
+
+# Без этого флага vLLM исполняет произвольный код из репозитория модели
+trust-remote-code: false
+
+disable-uvicorn-access-log: false

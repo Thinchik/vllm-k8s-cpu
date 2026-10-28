@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# namespace из base не распространяется на ресурсы, созданные в overlay (секреты)
+namespace: llm-inference
+
+resources:
+  - ../../base
+
+# Секреты генерируются из локальных файлов, которых нет в git (см. .gitignore).
+# Шаблоны лежат рядом: hf-token.env.example и api-token.env.example.
+secretGenerator:
+  - name: hf-token
+    envs:
+      - secrets/hf-token.env
+    type: Opaque
+  - name: vllm-api-token
+    envs:
+      - secrets/api-token.env
+    type: Opaque
+
+images:
+  - name: vllm-cpu
+    newTag: local
+  - name: vllm-model-downloader
+    newTag: local

@@ -1,0 +1,12 @@
+# Сгенерировано из k8s/base для применения без kustomize: kubectl apply -f k8s/plain/
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vllm-models
+  namespace: llm-inference
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi

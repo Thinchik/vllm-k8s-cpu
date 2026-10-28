@@ -1,0 +1,2 @@
+# Полный граф с хешами: ./scripts/lock-requirements.sh -> requirements.txt
+huggingface_hub[hf_xet]

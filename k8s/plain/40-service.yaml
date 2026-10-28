@@ -1,0 +1,14 @@
+# Сгенерировано из k8s/base для применения без kustomize: kubectl apply -f k8s/plain/
+apiVersion: v1
+kind: Service
+metadata:
+  name: vllm
+  namespace: llm-inference
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: vllm
+  ports:
+  - name: http
+    port: 8000
+    targetPort: http

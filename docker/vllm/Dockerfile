@@ -1,14 +1,5 @@
-# syntax=docker/dockerfile:1.7
-#
-# vLLM (CPU) rootless-образ.
-# Колесо vLLM 0.32.0+cpu собрано под manylinux_2_39, поэтому база - Debian trixie (glibc 2.41).
-# В проде базовый образ лучше закрепить по digest: python:3.12-slim-trixie@sha256:...
-
 ARG PYTHON_IMAGE=python:3.12-slim-trixie
 
-############################
-# builder: ставим зависимости в venv строго по lock-файлу
-############################
 FROM ${PYTHON_IMAGE} AS builder
 
 ENV PIP_NO_CACHE_DIR=1 \

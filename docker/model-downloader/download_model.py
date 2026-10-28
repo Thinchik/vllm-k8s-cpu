@@ -1,20 +1,3 @@
-#!/usr/bin/env python3
-"""Скачивание весов модели с Hugging Face в примонтированный volume.
-
-Запускается в initContainer. Логика:
-  * веса лежат в  $MODELS_DIR/<org>--<name>/<revision>/
-  * после успешной загрузки там создается маркер .download-complete
-  * если маркер уже есть - выходим сразу, в сеть не обращаемся
-  * параллельный запуск двух подов на одном PVC защищен файловой блокировкой
-
-Переменные окружения:
-  MODEL_ID        - например Qwen/Qwen2.5-1.5B-Instruct (обязательно)
-  MODEL_REVISION  - ветка/тег/коммит, по умолчанию main
-  MODELS_DIR      - точка монтирования PVC, по умолчанию /models
-  HF_TOKEN        - токен HF из Secret, нужен для gated-моделей (необязательно)
-  ALLOW_PATTERNS  - какие файлы качать, через запятую
-"""
-
 from __future__ import annotations
 
 import fcntl

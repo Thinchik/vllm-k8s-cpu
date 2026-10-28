@@ -1,8 +1,3 @@
-# syntax=docker/dockerfile:1.7
-#
-# Легковесный rootless-образ для initContainer: только python + huggingface_hub.
-# Итоговый размер порядка 150 МБ против нескольких ГБ у образа vLLM.
-
 ARG PYTHON_IMAGE=python:3.12-slim-trixie
 
 FROM ${PYTHON_IMAGE} AS builder
